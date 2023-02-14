@@ -1,7 +1,7 @@
 import sys
 # input()보다 sys.stdin.readline()이 더 빠르고 메모리도 적게 소모
 # 매번 sys.stdin.readline()을 적는 것보다
-#  input = sys.stdin.readline 으로 정의한 후 input()을 사용하는 것이 더 편함
+#  input = sys.stdin.readline 으로 정의한 후 input()을 사용하는 것이 더 편함.
 input = sys.stdin.readline
 N, M = map(int, input().split())
 arr = list(map(int, input().split()))
