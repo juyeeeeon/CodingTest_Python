@@ -3,7 +3,7 @@ input = sys.stdin.readline
 
 N = int(input().rstrip())
 
-count = 1 # N 그 자체
+count = 1 # N
 startIdx = 1
 endIdx = 1
 sum = 1
