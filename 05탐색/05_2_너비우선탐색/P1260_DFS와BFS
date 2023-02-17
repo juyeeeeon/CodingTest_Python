@@ -1,0 +1,40 @@
+from collections import deque
+import sys
+input = sys.stdin.readline
+print = sys.stdout.write
+
+def DFS(V:int):
+    visited[V] = True
+
+    print(str(V)+" ")
+
+    for i in arr[V]:
+        if not visited[i]:
+            DFS(i)
+
+def BFS(V:int):
+    queue = deque()
+    queue.append(V)
+    visited[V] = True
+
+    while queue:
+        now_node = queue.popleft()
+        print(str(now_node)+" ")
+
+        for i in arr[now_node]:
+            if not visited[i]:
+                visited[i] = True
+                queue.append(i)
+
+N, M, V = map(int, input().split())
+visited = [False]*(N+1)
+arr = [[] for _ in range(N+1)]
+
+for _ in range(M):
+    s, e = map(int, input().split())
+    arr[s].append(e)
+    arr[e].append(s)
+
+DFS(V)
+print()
+BFS(V)
