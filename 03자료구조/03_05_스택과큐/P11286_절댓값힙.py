@@ -4,6 +4,8 @@ input = sys.stdin.readline
 print = sys.stdout.write
 
 N = int(input().rstrip())
+#힙을 만들려면, []로 초기화된 리스트를 사용하거나, 
+#함수 heapify()를 통해 값이 들어 있는 리스트를 힙으로 변환 할 수 있다.
 heap = []
 
 for i in range(N):

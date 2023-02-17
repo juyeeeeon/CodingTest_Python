@@ -1,0 +1,24 @@
+def swap(a:int, b:int):
+    global arr
+    tmp = arr[a]
+    arr[a] = arr[b]
+    arr[b] = tmp
+
+import sys
+input = sys.stdin.readline
+
+arr = list(map(int, input().rstrip()))
+
+#selection sort(O(n^2))
+for i in range(len(arr)-1):
+    maxIdx = i
+    for j in range(i+1, len(arr)):
+        if arr[maxIdx] < arr[j]: #내림차순
+            maxIdx = j
+    swap(maxIdx, i)
+
+#arr.sort(reverse=True) #O(nlgn)
+
+for i in arr:
+    print(i, end='')
+
