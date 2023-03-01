@@ -5,74 +5,43 @@ input = sys.stdin.readline
 
 N = int(input())
 
-arr = []
-for _ in range(N):
-    arr.append(int(input()))
-
+p_queue = []
+n_queue = []
+one = 0
+zero = 0
 
 sum = 0
 
-while len(arr) > 1:
-    heapq._heapify_max(arr)
+for _ in range(N):
+    tmp = int(input())
+    if tmp > 1:
+        heapq.heappush(p_queue, tmp)
+    elif tmp < 0:
+        heapq.heappush(n_queue, tmp)
+    elif tmp == 1:
+        one+=1
+    else:
+        zero+=1
 
-    tmp1 = heapq.heappop(arr)
-    heapq._heapify_max(arr)
-    tmp2 = heapq.heappop(arr)
-    heapq._heapify_max(arr)
+while len(p_queue) > 1:
+    heapq._heapify_max(p_queue)
+    tmp1 = heapq.heappop(p_queue)
+    heapq._heapify_max(p_queue)
+    tmp2 = heapq.heappop(p_queue)
+    sum += tmp1 * tmp2
 
-    if tmp1 > 1:
-        if tmp2 > 1:
-            sum += tmp1 * tmp2
-        elif tmp2 == 1:
-            sum += tmp1
-            sum += tmp2
-        else:
-            heapq.heappush(arr, tmp2)
-            heapq._heapify_max(arr)
-    
-    elif tmp1 == 1:
-        if tmp2 == 0:
-            sum += tmp1
-            heapq.heappush(arr, tmp2)
-            heapq._heapify_max(arr)
-        elif tmp2 < 0:
-            sum += tmp1
-            heapq.heappush(arr, tmp2)
-            break
+if len(p_queue) > 0:
+    sum += heapq.heappop(p_queue)
 
+while len(n_queue) > 1:
+    tmp1 = heapq.heappop(n_queue)
+    tmp2 = heapq.heappop(n_queue)
+    sum += tmp1 * tmp2
 
-    elif tmp1 == 0:
-        heapq.heappush(arr, tmp2)
-        heapq.heappop(arr)
-        heapq._heapify_max(arr)
-        
+if len(n_queue) > 0:
+    if zero == 0:
+        sum+= heapq.heappop(n_queue)
 
-    elif tmp1 < 0:
-        break
-
-    """
-    if arr[0] == 0:
-        tmp1 = heapq.heappop(arr)
-        heapq._heapify_max(arr)
-        tmp2 = heapq.heappop(arr)
-
-        sum += tmp1*tmp2
-
-    elif arr[0] < 0:
-        break
-
-    elif arr[0]>0 :
-        if arr[1] <= 0:
-            sum += heapq.heappop(arr)
-        else:
-            tmp1 = heapq.heappop(arr)
-
-            heapq._heapify_max(arr)
-            tmp2 = heapq.heappop(arr)
-
-            sum += tmp1*tmp2
-    """
-for i in arr:
-    sum += i
+sum += one
 
 print(sum)
